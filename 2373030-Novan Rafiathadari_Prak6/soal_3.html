@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2373030-Prak6-Novan-Soal3</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        td {
+            width: 60px;
+            height: 80px;
+            background-color: orange;
+            border: 1px solid #fff;
+        }
+        #container {
+            width: 800px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid black;
+            margin: 20px auto;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <label for="tinggi">Tinggi Piramida: </label>
+    <input type="text" id="tinggi">
+    <button onclick="generatePiramida()">Proses</button>
+        <table id="piramida"></table>
+    </div>
+    <script>
+        function generatePiramida() {
+            var tinggi = parseInt(document.getElementById("tinggi").value);
+            if (isNaN(tinggi) || tinggi <= 0) {
+                alert("Masukkan angka yang valid!");
+                return;
+            }
+            var table = document.getElementById("piramida");
+            table.innerHTML = "";
+            for (var i = 1; i <= tinggi; i++) {
+                var row = document.createElement("tr");
+                for (var j = 0; j < tinggi - i; j++) {
+                    var emptyCell = document.createElement("td");
+                    emptyCell.style.backgroundColor = "transparent";
+                    row.appendChild(emptyCell);
+                }
+                for (var k = 0; k < (2 * i - 1); k++) {
+                    var cell = document.createElement("td");
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+        }
+    </script>
+</body>
+</html>

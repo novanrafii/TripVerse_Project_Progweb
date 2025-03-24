@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2373030-Prak6-Novan Rafiathadari_soal4</title>
+    <style>
+      td {
+        border: 2px double gray;
+      }
+      .td1 {
+        width: 100px;
+        text-align-last: right;
+        color: blue;
+        font-weight: bold;
+      }
+      tr {
+        border: 10px double gray;
+      }
+      select {
+        margin-inline-start: 125px;
+      }
+      button {
+        margin-left: 115px;
+      }
+      .button1 {
+        margin-left: -1px;
+      }
+      input {
+        margin: 2px;
+        padding: 2px;
+        font-size: 16px;
+      }
+    </style>
+    <script>
+      function convert() {
+        var input = document.getElementById("input").value;
+        var mode = document.getElementById("mode").value;
+        var tampilOutput = document.getElementById("output");
+        var hasil = "";
+
+        if (mode === "decimal-binary") {
+          var decimal = parseInt(input);
+          if (isNaN(decimal) || decimal < 0 || decimal > 255) {
+            alert("Masukkan angka antara 0 hingga 255");
+            return;
+          }
+          hasil = manualDecimalToBinary(decimal);
+        } else {
+          if (!isValidBinary(input)) {
+            alert("Masukkan angka biner 8 digit (0 dan 1 saja)");
+            return;
+          }
+          hasil = manualBinaryToDecimal(input);
+        }
+
+        tampilOutput.value = hasil;
+      }
+
+      function manualDecimalToBinary(decimal) {
+        var binary = "";
+        while (decimal > 0) {
+          if (decimal / 2 === Math.floor(decimal / 2)) {
+            binary = "0" + binary;
+          } else {
+            binary = "1" + binary;
+          }
+          decimal = Math.floor(decimal / 2);
+        }
+        return binary;
+      }
+      function manualBinaryToDecimal(binary) {
+        var decimal = 0;
+        for (var i = 0; i < binary.length; i++) {
+          decimal = decimal * 2 + parseInt(binary[i]);
+        }
+        return decimal;
+      }
+
+      function isValidBinary(input) {
+        if (input.length < 1 || input.length > 8) return false;
+        for (let i = 0; i < input.length; i++) {
+          if (input[i] !== "0" && input[i] !== "1") return false;
+        }
+        return true;
+      }
+
+      function resetForm() {
+        document.getElementById("input").value = "";
+        document.getElementById("output").value = "";
+      }
+    </script>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td class="td1">
+          <label for="input">Input :</label>
+        </td>
+        <td>
+          <input type="text" id="input" />
+        </td>
+      </tr>
+      <tr>
+        <td class="td1">
+          <label for="output">Output :</label>
+        </td>
+        <td>
+          <input type="text" id="output" disabled />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <select id="mode">
+            <option value="decimal-binary">decimal-Biner</option>
+            <option value="binary-decimal">Biner-Decimal</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button onclick="convert()">PROSES</button>
+          <button class="button1" onclick="resetForm()">RESET</button>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
